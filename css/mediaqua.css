@@ -1,0 +1,11 @@
+@media screen and (min-width: 768px) {
+  .card img {
+    height: 150px;
+  }
+
+}
+@media screen and (min-width: 993px) {
+  .pos-x {
+    left: 95%;
+  }
+}
