@@ -137,6 +137,56 @@ body {
 .hightdes {
   height: 40px;
 }
+:root {
+  --gradient-shadow: linear-gradient(
+    45deg,
+    #fb009296,
+    #0000ffa4,
+    #00ff00a5,
+    #ffff00b4,
+    #ff00009c,
+    #fb0092b6,
+    #0000ffb1,
+    #00ff00b1,
+    #ffff00,
+    #ff0000
+  );
+}
+.card {
+  position: relative;
+}
+.card:before,
+.card:after {
+  content: "";
+  position: absolute;
+  background: var(--gradient-shadow);
+  background-size: 400%;
+  inset: -3px;
+  z-index: -1;
+  animation: animate 20s linear infinite;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  -webkit-animation: animate 20s linear infinite;
+}
+
+.card:after {
+  filter: blur(6px);
+  -webkit-filter: blur(6px);
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 300% 0;
+  }
+}
+
 /* =============================Game Layer=================================== */
 #game-descreption {
   background-color: black;
@@ -298,6 +348,7 @@ body {
 .ip__worm2 {
   animation-name: worm2;
 }
+/* =============================Media quary================================ */
 
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
@@ -337,4 +388,16 @@ body {
   to {
     stroke-dashoffset: -358;
   }
+}
+
+/* =============================For Design================================ */
+.my-search-btn {
+  transform: translate(-1.5%, -103%);
+  -webkit-transform: translate(-1.5%, -103%);
+  -moz-transform: translate(-1.5%, -103%);
+  -ms-transform: translate(-1.5%, -103%);
+  -o-transform: translate(-1.5%, -103%);
+}
+.my-search-input {
+  font-family: var(--comforta-font);
 }

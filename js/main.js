@@ -4,39 +4,56 @@ let thirdPage = document.getElementById('nav-sailing-tab');
 let furthPage = document.getElementById('nav-permadeath-tab');
 let fifthPage = document.getElementById('nav-superhero-tab');
 let sixthPage = document.getElementById('nav-pixel-tab');
+let searchIn = document.getElementById('search');
 
 let loaderPade = document.getElementById('lodainglayer');
 // ==================The first visit================
+var x = "";
+var y = "";
 let games = '';
 if (games == '') {
     getGames('mmorpg', '#nav-mmorpg .row');
+    x = 'mmorpg'
+    y = '#nav-mmorpg .row'
 }
 
 // ==================Changing the data================
 firstPage.addEventListener('click', function () {
     getGames('mmorpg', '#nav-mmorpg .row');
+    x = 'mmorpg'
+    y = '#nav-mmorpg .row'
 });
 secondPage.addEventListener('click', function () {
-    getGames(games = 'shooter', '#nav-shooter .row');
+    getGames('shooter', '#nav-shooter .row');
+    x = 'shooter'
+    y = '#nav-shooter .row'
 });
 thirdPage.addEventListener('click', function () {
     getGames('sailing', '#nav-sailing .row');
+    x = 'sailing'
+    y = '#nav-sailing .row'
 });
 furthPage.addEventListener('click', function () {
     getGames('permadeath', '#nav-permadeath .row');
+    x = 'permadeath'
+    y = '#nav-permadeath .row'
 });
 fifthPage.addEventListener('click', function () {
     getGames('superhero', '#nav-superhero .row');
+    x = 'superhero'
+    y = '#nav-superhero .row'
 });
 sixthPage.addEventListener('click', function () {
     getGames('pixel', '#nav-pixel .row');
+    x = 'pixel'
+    y = '#nav-pixel .row'
 });
 
 
 // ==================Getting Games================
 
 async function getGames(games, elmkan) {
-    loaderPade.classList.remove('d-none');
+    // loaderPade.classList.remove('d-none');
     const url = `https://free-to-play-games-database.p.rapidapi.com/api/games?category=${games}`;
     const options = {
         method: 'GET',
@@ -49,7 +66,16 @@ async function getGames(games, elmkan) {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        display(result, elmkan); //assigns the results and the (elmkan) to assign the place of the desplaying data
+        let arr2 = []
+        let hambozo = searchIn.value;
+        for (var i = 0; i < result.length; i++) {
+            if (result[i].title.toLowerCase().includes(hambozo.toLowerCase())) {
+                arr2.push(result[i])
+            }
+        };
+
+        display(arr2, elmkan); //assigns the results and the (elmkan) to assign the place of the desplaying data
+
         loaderPade.classList.add('d-none');
         console.log(result);
     } catch (error) {
@@ -58,9 +84,11 @@ async function getGames(games, elmkan) {
 };
 
 // ========================== Getting Display of the Games =========================
+
 function display(arr, hatElmkan) {
     let container = ``;
     for (let i = 0; i < arr.length; i++) {
+
 
         let shortdes = arr[i].short_description;
         if (shortdes.length > 50) {
@@ -89,6 +117,7 @@ function display(arr, hatElmkan) {
                                     </ul>
                                 </div>
                             </div>`;
+
 
     }
     document.querySelector(hatElmkan).innerHTML = container // getting the place of the display by clicking the nave tabs 
@@ -168,3 +197,9 @@ function getclose() {
     theDescription.classList.add('d-none');
     theMainElement.classList.remove('d-none');
 }
+// ========================For Design===============================
+let srachBtn = document.getElementById('srachBtn');
+
+srachBtn.addEventListener('click', function () {
+    getGames(x, y);
+});
