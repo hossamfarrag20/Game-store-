@@ -53,7 +53,7 @@ sixthPage.addEventListener('click', function () {
 // ==================Getting Games================
 
 async function getGames(games, elmkan) {
-    // loaderPade.classList.remove('d-none');
+    loaderPade.classList.remove('d-none');
     const url = `https://free-to-play-games-database.p.rapidapi.com/api/games?category=${games}`;
     const options = {
         method: 'GET',
